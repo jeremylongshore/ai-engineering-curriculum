@@ -23,6 +23,8 @@ featured: true
 
 That's why I've created something special...
 
+*Originally inspired by [Zach Wilson (@eczachly)'s X post](https://twitter.com/eczachly) on AI Engineering levels*
+
 ## 🔥 [**Access the Complete Interactive Curriculum HERE**](https://jeremylongshore.github.io/ai-engineering-curriculum/)
 
 ## What Makes This Different From Everything Else
