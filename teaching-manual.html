@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teaching Manual - AI Engineering Curriculum</title>
+    <meta name="description" content="Complete guide for educators teaching AI Engineering. Lesson plans, assessments, and pedagogical strategies.">
+
+    <meta property="og:title" content="📚 AI Engineering Teaching Manual - For Educators">
+    <meta property="og:description" content="Complete guide for teaching AI Engineering. Lesson plans, assessments, common challenges, and solutions for educators.">
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --emerald: #10b981;
+            --teal: #14b8a6;
+            --green: #22c55e;
+            --forest: #16a34a;
+            --black: #0a0a0a;
+            --dark-gray: #1a1a1a;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        .hero-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #10b981, #14b8a6, #22c55e, #16a34a);
+            background-size: 400% 400%;
+            animation: gradientShift 35s ease infinite;
+            opacity: 0.08;
+            z-index: -1;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--emerald), var(--teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--emerald); }
+
+        .hero {
+            margin-top: 80px;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--white), var(--emerald));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3rem;
+        }
+
+        .content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--dark-gray);
+            border-radius: 16px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            color: var(--emerald);
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--emerald);
+            padding-left: 1rem;
+        }
+
+        .section h3 {
+            font-size: 1.4rem;
+            color: var(--teal);
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .section p {
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .section ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .section li {
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .highlight-box {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--emerald);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        th {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--emerald);
+            font-weight: 600;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--emerald);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 0.5rem;
+        }
+
+        .btn:hover {
+            background: var(--forest);
+            transform: translateY(-2px);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--emerald), var(--teal));
+            z-index: 10000;
+            transition: width 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .content { margin: 1rem; padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-background"></div>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">📚 Teaching Manual</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="level-1.html">Level 1</a></li>
+                <li><a href="level-2.html">Level 2</a></li>
+                <li><a href="level-3.html">Level 3</a></li>
+                <li><a href="level-4.html">Level 4</a></li>
+                <li><a href="https://github.com/jeremylongshore/ai-engineering-curriculum">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1 class="hero-title">Teaching Manual</h1>
+        <p class="hero-subtitle">Complete guide for educators teaching AI Engineering</p>
+    </section>
+
+    <div class="content">
+        <div class="section">
+            <h2>🎯 Course Overview</h2>
+            <p>This comprehensive manual provides professors with everything needed to deliver a cutting-edge AI Engineering curriculum to undergraduate students pursuing degrees in AI/ML.</p>
+
+            <div class="highlight-box">
+                <h3>Core Principles</h3>
+                <ul>
+                    <li><strong>Practical First:</strong> Every concept is immediately applied through hands-on coding</li>
+                    <li><strong>Current Technology:</strong> All content reflects 2024-2025 state-of-the-art practices</li>
+                    <li><strong>Production Focus:</strong> Students learn to build systems that work in the real world</li>
+                    <li><strong>Progressive Complexity:</strong> Each level scaffolds knowledge appropriately</li>
+                    <li><strong>Industry Alignment:</strong> Skills directly transfer to professional environments</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📚 Course Structure</h2>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Level</th>
+                            <th>Duration</th>
+                            <th>Focus</th>
+                            <th>Key Skills</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Level 1: Using AI</strong></td>
+                            <td>8 weeks</td>
+                            <td>Fundamentals & API Usage</td>
+                            <td>Prompt engineering, API integration, cost optimization</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Level 2: Integrating AI</strong></td>
+                            <td>8 weeks</td>
+                            <td>Building AI Systems</td>
+                            <td>RAG, vector databases, agents, performance optimization</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Level 3: Engineering AI</strong></td>
+                            <td>8 weeks</td>
+                            <td>Production-Ready Development</td>
+                            <td>Fine-tuning, safety, multi-model architectures, evaluation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Level 4: Optimizing at Scale</strong></td>
+                            <td>8 weeks</td>
+                            <td>Enterprise Deployment</td>
+                            <td>Distributed inference, compliance, cost optimization</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎓 Teaching Methodologies</h2>
+
+            <h3>The 70/30 Practice-First Approach</h3>
+            <p>Research from SIGCSE 2025 confirms that hands-on practice should dominate, with theory integrated just-in-time during practical work.</p>
+
+            <div class="highlight-box">
+                <h3>Optimized Session Structure (1.5 hours)</h3>
+                <ul>
+                    <li><strong>10 minutes:</strong> Concept review and setup</li>
+                    <li><strong>25 minutes:</strong> Interactive theory block</li>
+                    <li><strong>10 minutes:</strong> Break for cognitive reset</li>
+                    <li><strong>35 minutes:</strong> Guided coding practice</li>
+                    <li><strong>10 minutes:</strong> Reflection and Q&A</li>
+                </ul>
+            </div>
+
+            <h3>Interactive Demonstrations</h3>
+            <ul>
+                <li>Live coding during lectures</li>
+                <li>Real-time API interactions</li>
+                <li>Error debugging sessions</li>
+                <li>Performance profiling</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>💻 Technical Infrastructure</h2>
+
+            <h3>Hardware Requirements</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Minimum</th>
+                            <th>Recommended</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RAM</td>
+                            <td>8GB</td>
+                            <td>16GB+</td>
+                        </tr>
+                        <tr>
+                            <td>CPU</td>
+                            <td>Quad-core</td>
+                            <td>8+ cores</td>
+                        </tr>
+                        <tr>
+                            <td>GPU</td>
+                            <td>Not required</td>
+                            <td>GPU access for Level 3-4</td>
+                        </tr>
+                        <tr>
+                            <td>Cloud Credits</td>
+                            <td>$100/student</td>
+                            <td>$150/student</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Software Stack</h3>
+            <ul>
+                <li>Python 3.9+</li>
+                <li>VS Code or PyCharm</li>
+                <li>Git and GitHub</li>
+                <li>Docker (Level 3+)</li>
+                <li>Google Colab Pro for GPU access</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📊 Assessment Framework</h2>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Weight</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Weekly Labs</td>
+                            <td>20%</td>
+                            <td>Hands-on assignments</td>
+                        </tr>
+                        <tr>
+                            <td>Code Quality</td>
+                            <td>15%</td>
+                            <td>Documentation and best practices</td>
+                        </tr>
+                        <tr>
+                            <td>Peer Reviews</td>
+                            <td>10%</td>
+                            <td>Code review participation</td>
+                        </tr>
+                        <tr>
+                            <td>Class Participation</td>
+                            <td>15%</td>
+                            <td>Engagement and questions</td>
+                        </tr>
+                        <tr>
+                            <td>Level Projects</td>
+                            <td>40%</td>
+                            <td>4 major projects (10% each)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⚡ Common Challenges & Solutions</h2>
+
+            <h3>Challenge 1: API Costs</h3>
+            <p><strong>Problem:</strong> Students exhausting API credits</p>
+            <p><strong>Solutions:</strong></p>
+            <ul>
+                <li>Implement strict rate limiting</li>
+                <li>Use caching aggressively</li>
+                <li>Provide mock API for testing</li>
+                <li>Start with smaller models</li>
+            </ul>
+
+            <h3>Challenge 2: Technical Complexity</h3>
+            <p><strong>Problem:</strong> Students overwhelmed by complexity</p>
+            <p><strong>Solutions:</strong></p>
+            <ul>
+                <li>Break into smaller modules</li>
+                <li>Provide starter code</li>
+                <li>Pair stronger with struggling students</li>
+                <li>Extra office hours</li>
+            </ul>
+
+            <h3>Challenge 3: Rapid Technology Changes</h3>
+            <p><strong>Problem:</strong> Content becoming outdated</p>
+            <p><strong>Solutions:</strong></p>
+            <ul>
+                <li>Update examples quarterly</li>
+                <li>Focus on principles over tools</li>
+                <li>Teach adaptation skills</li>
+                <li>Use version pinning</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🌟 Best Practices for Professors</h2>
+
+            <h3>Preparation</h3>
+            <ul>
+                <li>Test all code examples before class</li>
+                <li>Have backup plans for API failures</li>
+                <li>Prepare additional challenges for advanced students</li>
+                <li>Create solution repositories</li>
+            </ul>
+
+            <h3>During Class</h3>
+            <ul>
+                <li>Start with recap of previous session</li>
+                <li>Use real-world examples</li>
+                <li>Encourage questions</li>
+                <li>Live debug issues</li>
+            </ul>
+
+            <h3>After Class</h3>
+            <ul>
+                <li>Provide detailed feedback</li>
+                <li>Share additional resources</li>
+                <li>Monitor student progress</li>
+                <li>Adjust pace as needed</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🔗 Quick Links</h2>
+            <div style="text-align: center; margin: 2rem 0;">
+                <a href="https://github.com/jeremylongshore/ai-engineering-curriculum/blob/main/TEACHING_MANUAL.md" class="btn">📄 Full Teaching Manual</a>
+                <a href="level-1.html" class="btn">🚀 Level 1 Curriculum</a>
+                <a href="https://github.com/jeremylongshore/ai-engineering-curriculum" class="btn">💻 GitHub Repository</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📞 Support & Community</h2>
+            <p>Join the community of educators teaching AI Engineering:</p>
+            <ul>
+                <li><strong>GitHub Discussions:</strong> Share experiences and get help</li>
+                <li><strong>Monthly Webinars:</strong> Latest updates and best practices</li>
+                <li><strong>Educator Discord:</strong> Real-time chat with fellow instructors</li>
+                <li><strong>Resource Library:</strong> Continuously updated materials</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>Remember:</strong> The goal is not just to teach students how to use AI, but to empower them to build the AI systems of the future. Focus on principles that will endure even as specific technologies evolve.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 3: Engineering AI Systems - Production Ready | AI Engineering Curriculum</title>
+    <meta name="description" content="Fine-tuning, safety guardrails, and enterprise deployment. Transform prototypes into bulletproof production systems.">
+
+    <meta property="og:title" content="⚡ Level 3: Engineer Bulletproof AI Systems">
+    <meta property="og:description" content="Fine-tuning, Safety, Multi-model - Go from 'it works' to 'it works reliably'. 40% performance gains with LoRA/QLoRA.">
+    <meta property="og:image" content="https://jeremylongshore.github.io/ai-engineering-curriculum/images/level-3-preview.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --amber: #fbbf24;
+            --orange: #f97316;
+            --red: #ef4444;
+            --purple: #8b5cf6;
+            --black: #0a0a0a;
+            --dark-gray: #1a1a1a;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        .hero-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #fbbf24, #f97316, #ef4444, #8b5cf6);
+            background-size: 400% 400%;
+            animation: gradientShift 25s ease infinite;
+            opacity: 0.12;
+            z-index: -1;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--amber), var(--orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--amber);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+
+        .hero {
+            margin-top: 80px;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--amber);
+            color: var(--black);
+            font-weight: 700;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--white), var(--amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3rem;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-card { text-align: center; }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--amber), var(--orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 0.5rem;
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 100%;
+            background: var(--amber);
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .topic-card {
+            background: var(--dark-gray);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--amber);
+            box-shadow: 0 10px 40px rgba(251, 191, 36, 0.2);
+        }
+
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--amber), var(--orange));
+        }
+
+        .topic-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .topic-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .topic-description {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(249, 115, 22, 0.1));
+            border-radius: 24px;
+            margin: 4rem auto;
+            max-width: 1000px;
+        }
+
+        .btn-primary {
+            padding: 1rem 2.5rem;
+            background: var(--amber);
+            color: var(--black);
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            margin: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.4);
+        }
+
+        .btn-secondary {
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: var(--white);
+            font-weight: 600;
+            border: 2px solid var(--white);
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            margin: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--amber), var(--orange));
+            z-index: 10000;
+            transition: width 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-title { font-size: 3rem; }
+            .stats-container { gap: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-background"></div>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">🚀 AI Engineering</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="level-2.html">← Level 2</a></li>
+                <li><a href="level-4.html">Level 4 →</a></li>
+                <li><a href="teaching-manual.html">Teaching</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <span class="level-badge">LEVEL 3</span>
+        <h1 class="hero-title">Engineering AI Systems</h1>
+        <p class="hero-subtitle">From "it works" to "it works reliably" - Like TaskUs's zero-incident system</p>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-number">40%</div>
+                <div class="stat-label">Performance Gain</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">99.3%</div>
+                <div class="stat-label">ChatGPT Quality</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">65B</div>
+                <div class="stat-label">Params on 1 GPU</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2 class="section-title">Master Production Engineering</h2>
+
+        <div class="topics-grid">
+            <div class="topic-card">
+                <div class="topic-icon">⚙️</div>
+                <h3 class="topic-title">Fine-Tuning Mastery</h3>
+                <p class="topic-description">LoRA, QLoRA, RLHF - Train 65B models on single GPUs. Achieve 40% performance gains like Databricks.</p>
+            </div>
+
+            <div class="topic-card">
+                <div class="topic-icon">🛡️</div>
+                <h3 class="topic-title">Safety Guardrails</h3>
+                <p class="topic-description">Zero incidents like TaskUs protecting 50K employees. PII detection, toxicity filtering, adversarial testing.</p>
+            </div>
+
+            <div class="topic-card">
+                <div class="topic-icon">🏗️</div>
+                <h3 class="topic-title">Multi-Model Architecture</h3>
+                <p class="topic-description">Cascading systems, specialist agents, ensemble methods. Optimize cost and performance simultaneously.</p>
+            </div>
+
+            <div class="topic-card">
+                <div class="topic-icon">📊</div>
+                <h3 class="topic-title">Evaluation Frameworks</h3>
+                <p class="topic-description">BLEU, ROUGE, human eval, A/B testing. Measure what matters in production systems.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2 class="section-title">What You'll Build</h2>
+
+        <div class="topics-grid">
+            <div class="topic-card">
+                <div class="topic-icon">🔧</div>
+                <h3 class="topic-title">Week 17-19: Custom Fine-Tuned Model</h3>
+                <p class="topic-description">Train domain-specific models with QLoRA. Achieve 99.3% of ChatGPT performance at fraction of the cost.</p>
+            </div>
+
+            <div class="topic-card">
+                <div class="topic-icon">🔒</div>
+                <h3 class="topic-title">Week 20-21: Safety System</h3>
+                <p class="topic-description">Multi-layered guardrails with sub-50ms latency. PII protection and compliance like Writer's enterprise solution.</p>
+            </div>
+
+            <div class="topic-card">
+                <div class="topic-icon">🎯</div>
+                <h3 class="topic-title">Week 22-23: Multi-Agent Orchestra</h3>
+                <p class="topic-description">Specialized agents working together. Research, analysis, and reporting like Accenture's Q4 Inc solution.</p>
+            </div>
+
+            <div class="topic-card">
+                <div class="topic-icon">📈</div>
+                <h3 class="topic-title">Week 24: Evaluation Pipeline</h3>
+                <p class="topic-description">Automated testing, human evaluation, performance monitoring. Production-grade quality assurance.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Ready for Production AI?</h2>
+        <p style="color: rgba(255, 255, 255, 0.8); font-size: 1.2rem;">Build systems that handle millions with bulletproof reliability</p>
+
+        <div style="margin-top: 2rem;">
+            <a href="https://github.com/jeremylongshore/ai-engineering-curriculum/blob/main/level-3-engineering-systems/curriculum.md" class="btn-primary">View Full Curriculum</a>
+            <a href="level-4.html" class="btn-secondary">Continue to Level 4 →</a>
+        </div>
+    </section>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+    </script>
+</body>
+</html>
