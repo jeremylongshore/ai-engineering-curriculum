@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Engineering Curriculum - From Fundamentals to Enterprise Scale</title>
+    <meta name="description" content="A comprehensive curriculum for mastering AI Engineering, from prompt engineering to enterprise deployment">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #22d3ee;
+            --accent: #f59e0b;
+            --bg-dark: #0f172a;
+            --bg-light: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border: #334155;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: linear-gradient(45deg, #0f172a, #1e293b);
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 3s ease infinite;
+        }
+
+        @keyframes gradient {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(30deg); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .hero-quote {
+            background: var(--bg-light);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 3rem auto;
+            max-width: 800px;
+            border-radius: 8px;
+            font-style: italic;
+        }
+
+        .attribution {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Level Cards */
+        .levels-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .levels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .level-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .level-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+        }
+
+        .level-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .level-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .level-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .level-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .level-topics {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .level-topics li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+        }
+
+        .level-topics li::before {
+            content: '→';
+            color: var(--secondary);
+            margin-right: 0.5rem;
+        }
+
+        .level-link {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.3s;
+            font-weight: 600;
+        }
+
+        .level-link:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--bg-light);
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+        }
+
+        .features-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        /* Resources Section */
+        .resources {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .resource-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .resource-link {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .resource-link:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-light);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .levels-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">🚀 AI Engineering Curriculum</div>
+            <ul class="nav-links">
+                <li><a href="#levels">Levels</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="TEACHING_MANUAL.html">Teaching Manual</a></li>
+                <li><a href="https://github.com/jeremylongshore/ai-engineering-curriculum">GitHub</a></li>
+                <li><a href="https://startsitools.com">Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <h1>Master AI Engineering</h1>
+        <p class="hero-subtitle">From Fundamentals to Enterprise Scale</p>
+
+        <div class="hero-quote">
+            <p>"AI Engineering has levels to it" - A comprehensive curriculum that takes you from using AI APIs to building enterprise-scale systems</p>
+            <div class="attribution">
+                Inspired by the AI Engineering Continuum framework and industry best practices<br>
+                Based on research from "The AI Engineering Continuum: A White Paper on the Levels of System Mastery"
+            </div>
+        </div>
+    </section>
+
+    <!-- Levels Section -->
+    <section class="levels-container" id="levels">
+        <h2 class="section-title">The Four Levels of AI Engineering</h2>
+        <p class="section-subtitle">Progressive mastery from fundamentals to scale</p>
+
+        <div class="levels-grid">
+            <!-- Level 1 -->
+            <div class="level-card fade-in">
+                <span class="level-number">Level 1</span>
+                <h3 class="level-title">Using AI</h3>
+                <p class="level-description">Master the fundamentals of AI interaction</p>
+                <ul class="level-topics">
+                    <li>Prompt Engineering (Zero-shot, Few-shot, CoT)</li>
+                    <li>API Integration (OpenAI, Anthropic, Cohere)</li>
+                    <li>Token Management & Context Windows</li>
+                    <li>Cost Optimization Strategies</li>
+                </ul>
+                <a href="level-1-using-ai/curriculum.html" class="level-link">Explore Level 1 →</a>
+            </div>
+
+            <!-- Level 2 -->
+            <div class="level-card fade-in">
+                <span class="level-number">Level 2</span>
+                <h3 class="level-title">Integrating AI</h3>
+                <p class="level-description">Build intelligent AI-powered systems</p>
+                <ul class="level-topics">
+                    <li>Retrieval Augmented Generation (RAG)</li>
+                    <li>Vector Databases & Embeddings</li>
+                    <li>Agent Architecture & Tool Use</li>
+                    <li>Caching & Performance Optimization</li>
+                </ul>
+                <a href="level-2-integrating-ai/curriculum.html" class="level-link">Explore Level 2 →</a>
+            </div>
+
+            <!-- Level 3 -->
+            <div class="level-card fade-in">
+                <span class="level-number">Level 3</span>
+                <h3 class="level-title">Engineering AI Systems</h3>
+                <p class="level-description">Transform prototypes into production-ready systems</p>
+                <ul class="level-topics">
+                    <li>Fine-tuning (LoRA, QLoRA, RLHF)</li>
+                    <li>Safety Guardrails & Compliance</li>
+                    <li>Multi-Model Architectures</li>
+                    <li>Evaluation Frameworks</li>
+                </ul>
+                <a href="level-3-engineering-systems/curriculum.html" class="level-link">Explore Level 3 →</a>
+            </div>
+
+            <!-- Level 4 -->
+            <div class="level-card fade-in">
+                <span class="level-number">Level 4</span>
+                <h3 class="level-title">Optimizing AI at Scale</h3>
+                <p class="level-description">Deploy and operate AI at enterprise scale</p>
+                <ul class="level-topics">
+                    <li>Distributed Inference (vLLM, Ray)</li>
+                    <li>Context & Memory Management</li>
+                    <li>Cost vs Performance Trade-offs</li>
+                    <li>Privacy, Compliance & Governance</li>
+                </ul>
+                <a href="level-4-optimizing-scale/curriculum.html" class="level-link">Explore Level 4 →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="section-title">Why This Curriculum?</h2>
+        <p class="section-subtitle">Built for the modern AI engineering landscape</p>
+
+        <div class="features-grid">
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🎯</div>
+                <h3 class="feature-title">Production-Focused</h3>
+                <p>Learn to build systems that work in the real world, not just in notebooks</p>
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🔄</div>
+                <h3 class="feature-title">Current & Updated</h3>
+                <p>Based on 2024-2025 state-of-the-art practices and technologies</p>
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-icon">💼</div>
+                <h3 class="feature-title">Industry-Aligned</h3>
+                <p>Skills that directly transfer to AI engineering roles</p>
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-icon">📈</div>
+                <h3 class="feature-title">Progressive Learning</h3>
+                <p>Structured path from beginner to advanced practitioner</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="resources" id="resources">
+        <h2 class="section-title">Resources & Materials</h2>
+        <p class="section-subtitle">Everything you need to succeed</p>
+
+        <div class="resource-links">
+            <a href="TEACHING_MANUAL.html" class="resource-link">
+                📚 Teaching Manual
+            </a>
+            <a href="https://github.com/jeremylongshore/ai-engineering-curriculum" class="resource-link">
+                💻 Code Examples
+            </a>
+            <a href="exercises/" class="resource-link">
+                🎯 Exercises
+            </a>
+            <a href="assessments/" class="resource-link">
+                📊 Assessments
+            </a>
+            <a href="https://startsitools.com/ai-engineering-curriculum" class="resource-link">
+                📝 Blog Post
+            </a>
+            <a href="white-paper.html" class="resource-link">
+                📄 White Paper
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/jeremylongshore/ai-engineering-curriculum">GitHub</a>
+            <a href="https://startsitools.com">StartSITools Blog</a>
+            <a href="mailto:contact@startsitools.com">Contact</a>
+            <a href="LICENSE">License</a>
+        </div>
+        <p style="color: var(--text-secondary);">
+            © 2025 AI Engineering Curriculum | Open Educational Content<br>
+            Built with inspiration from the AI community and industry best practices
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s, transform 0.5s';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

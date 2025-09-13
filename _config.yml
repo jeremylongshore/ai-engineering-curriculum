@@ -1,0 +1,43 @@
+# GitHub Pages Configuration
+title: AI Engineering Curriculum - From Zero to Enterprise Scale
+description: Master AI Engineering with this comprehensive curriculum covering prompt engineering, RAG, fine-tuning, and enterprise deployment
+url: https://jeremylongshore.github.io
+baseurl: /ai-engineering-curriculum
+
+# Theme settings
+theme: null
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# SEO
+twitter:
+  username: jeremylongshore
+  card: summary_large_image
+
+social:
+  name: AI Engineering Curriculum
+  links:
+    - https://github.com/jeremylongshore/ai-engineering-curriculum
+    - https://startsitools.com
+
+# Analytics (add your tracking ID)
+google_analytics: UA-XXXXXXXXX-X
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Collections
+collections:
+  levels:
+    output: true
+    permalink: /:name
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+      author: "AI Engineering Community"
